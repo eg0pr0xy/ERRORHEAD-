@@ -1,6 +1,7 @@
 # core/glitch_frame_wild.py
 
 import numpy as np
+import os # Ensure os is imported
 
 # ShaderManager will be passed as an argument
 
@@ -26,14 +27,18 @@ def glitch_frame_wild(frame_np, shader_manager, shader_path, vid_intensity, audi
         # Or, implement a basic numpy-based glitch here on frame_rgb as an alternative
         return frame_rgb
 
-    # Define uniforms for the shader
-    # 'amplitude' is used by reactive_wave.glsl
-    # 'intensity' could be a generic uniform for other shaders
-    uniforms = {
-        "amplitude": audio_amplitude * vid_intensity, # Combine audio reactivity with overall intensity
-        "intensity": vid_intensity
-        # Add other uniforms as needed by different shaders
-    }
+    # Define uniforms based on the shader
+    shader_name = os.path.basename(shader_path)
+    uniforms = {}
+
+    if shader_name == "reactive_wave.glsl":
+        uniforms["amplitude"] = audio_amplitude * vid_intensity # Combine audio reactivity
+    elif shader_name == "rgb_split.glsl":
+        # Scale vid_intensity for a reasonable offset range (e.g., 0.0 to 0.05)
+        uniforms["offset_amount"] = vid_intensity * 0.05 
+    else:
+        # Default uniform for other shaders, or can be left empty
+        uniforms["intensity"] = vid_intensity
 
     try:
         glitched_frame_rgb = shader_manager.apply_shader(frame_rgb, shader_path, uniforms)
