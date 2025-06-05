@@ -1,0 +1,8 @@
+numpy
+opencv-python
+pydub
+scipy
+Pillow
+moviepy
+ttkbootstrap
+moderngl
