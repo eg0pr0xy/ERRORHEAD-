@@ -61,7 +61,7 @@ ERRORHEAD is your conduit to the digital abyss, a Python-based tool for forging 
 
 1.  **`CLONE_SOURCE_CODE:`**
     ```bash
-    git clone https://github.com/YOUR_USERNAME/ERRORHEAD.git # <-- REPLACE WITH YOUR REPO URL
+    git clone https://github.com/eg0pr0xy/ERRORHEAD- 
     cd ERRORHEAD
     ```
 
